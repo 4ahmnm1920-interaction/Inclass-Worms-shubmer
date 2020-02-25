@@ -13,55 +13,68 @@ public class WormsController : MonoBehaviour
     public Rigidbody rb4;
     public Transform SpawnPoint;
     public Transform SpawnPoint2;
+    public KeyCode Shootkeyplayer1;
+    public KeyCode jumpplayer1;
+    public KeyCode moveleftplayer1;
+    public KeyCode moverightplyer1;
+
+    public KeyCode Shootkeyplayer2;
+    public KeyCode jumpplayer2;
+    public KeyCode moveleftplayer2;
+    public KeyCode moverightplyer2;
+
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(jumpplayer1))
         {
             Vector3 force = new Vector3(0,jumpforce,0);
             rb.AddForce(force);
-            Debug.Log("Space is pressed");
+            //Debug.Log("Space is pressed");
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(moverightplyer1))
         {
             Vector3 xsidewards = new Vector3(-moveforce, 0, 0);
             rb.AddForce(xsidewards);
         }
 
-        if(Input.GetKey(KeyCode.A))
+        if(Input.GetKey(moveleftplayer1))
         {
             Vector3 x2sidewards = new Vector3(moveforce, 0, 0);
             rb.AddForce(x2sidewards);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(Shootkeyplayer1))
         {
             Vector3 Position = SpawnPoint2.position;
-            Rigidbody clone;
-            clone = Instantiate(rb2, Position, transform.rotation);
-            clone.velocity = transform.TransformDirection(ForceSphere, 0f,0f);
+            
+            Rigidbody clone = Instantiate(rb2, Position, transform.rotation);
+            clone.velocity = transform.TransformDirection(-ForceSphere, 0f, 0f);
 
             Vector3 Shootingforce = new Vector3(ForceSphere, 0, 0);
             rb2.AddForce(Shootingforce);
+
+            Destroy(clone, 1);
         }
 
+
         //Second Player
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(jumpplayer2))
         {
             Vector3 force = new Vector3(0, jumpforce, 0);
             rb3.AddForce(force);
         }
-        if (Input.GetKey(KeyCode.L))
+        if (Input.GetKey(moverightplyer2))
         {
             Vector3 forcesidewards = new Vector3(-moveforce, 0, 0);
             rb3.AddForce(forcesidewards);
         }
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(moveleftplayer2))
         {
             Vector3 forcesidewards = new Vector3(moveforce, 0, 0);
             rb3.AddForce(forcesidewards);
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(Shootkeyplayer2))
         {
             Vector3 Player2Position = SpawnPoint.position;
             Rigidbody clone;
@@ -70,6 +83,10 @@ public class WormsController : MonoBehaviour
 
             Vector3 Shootingforce = new Vector3(ForceSphere, 0, 0);
             rb4.AddForce(Shootingforce);
+
+            Destroy(clone, 1);
         }
+
     }
+ 
 }
